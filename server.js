@@ -6,7 +6,8 @@ const app = express();
 const corsOptions = {
   origin: ['https://nzmo-store.vercel.app', 'http://localhost:3000'],
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type'],
+  credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -30,7 +31,12 @@ const allProducts = [
 
 // Basic health check endpoint
 app.get('/', (req, res) => {
-  res.json({ status: 'OK', message: 'API is running' });
+  res.json({ 
+    status: 'OK', 
+    message: 'API is running',
+    environment: process.env.PROJECT_DOMAIN ? 'Glitch' : 'Local',
+    timestamp: new Date().toISOString()
+  });
 });
 
 // فلترة الصفحة
@@ -90,7 +96,10 @@ app.post('/api/cart/reset', (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ API شغّال على http://localhost:${PORT}`);
+// Handle Glitch's container environment
+const listener = app.listen(process.env.PORT || 3000, () => {
+  console.log('✅ Your app is listening on port ' + listener.address().port);
+  console.log('📱 Health check at: ' + (process.env.PROJECT_DOMAIN ? 
+    `https://${process.env.PROJECT_DOMAIN}.glitch.me` : 
+    `http://localhost:${listener.address().port}`));
 }); 
