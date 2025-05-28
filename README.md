@@ -2,14 +2,40 @@
 
 A Node.js/Express backend for the NZMO Store e-commerce application.
 
+## Live Demo
+
+The API is running at: https://large-zigzag-gerbil.glitch.me
+
 ## Features
 
 - 🔄 Real-time product filtering API
 - 🛒 Cart management system
-- 🔒 CORS enabled
+- 🔒 CORS enabled for Vercel frontend
 - 📦 Sample product data included
+- 🚀 Deployed on Glitch
 
-## Setup
+## API Endpoints
+
+### Health Check
+- `GET /` - Basic health check endpoint
+
+### Product Filtering
+- `POST /api/filter` - Set filter criteria
+- `GET /api/filter` - Get current filter settings
+
+### Cart Management
+- `POST /api/cart/named` - Add products to cart by name
+- `GET /api/cart` - Get cart contents
+- `POST /api/cart/reset` - Clear the cart
+
+## Sample Data
+
+The backend includes sample product data for:
+- Samsung A23 (Phone)
+- LG WashPro (Washing Machine)
+- Xiaomi Note 12 (Phone)
+
+## Local Development
 
 1. Clone the repository:
 ```bash
@@ -27,24 +53,15 @@ npm install
 npm start
 ```
 
-The server will run on `http://localhost:3000`.
+## Deployment
 
-## API Endpoints
+This project is deployed on Glitch:
+1. Create a new project on [Glitch](https://glitch.com)
+2. Import from GitHub
+3. The project will automatically deploy and run
 
-### Product Filtering
+## CORS Configuration
 
-- `POST /api/filter` - Set filter criteria
-- `GET /api/filter` - Get current filter settings
-
-### Cart Management
-
-- `POST /api/cart/named` - Add products to cart by name
-- `GET /api/cart` - Get cart contents
-- `POST /api/cart/reset` - Clear the cart
-
-## Sample Data
-
-The backend includes sample product data for:
-- Samsung A23 (Phone)
-- LG WashPro (Washing Machine)
-- Xiaomi Note 12 (Phone) 
+The API is configured to accept requests from:
+- https://nzmo-store.vercel.app (Production)
+- http://localhost:3000 (Development) 
